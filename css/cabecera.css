@@ -1,0 +1,78 @@
+/*body general*/
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    
+}
+
+.box{
+    width: 100%;
+    height: 280%;
+}
+
+.box img{
+    width: 100%;
+    height: 280%;
+}
+
+.box .over-layer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(241, 70, 70, 0);
+    transition: all 0.35s linear;
+}
+
+.box:hover .over-layer{
+    background: rgb(241, 70, 70, 0.7);
+}
+
+.box 
+
+.cabeza{
+    width: 100%;
+    background: #ccc;
+}
+
+.cabeza .navegacion ul{
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.cabeza .navegacion ul li{
+    list-style: none;
+    position: relative;
+    padding: 10px 10px;
+    transition: 0.5s;
+    border-right: 1px solid rgb(50, 39, 196);
+}
+
+.cabeza .navegacion ul li:last-child{
+    
+    border-right: none;
+}
+
+.cabeza .navegacion ul li a{
+    text-decoration: none;
+    padding: 0 5px;
+    color: black;
+
+}
+
+.cabeza .navegacion ul li:hover{
+    background: hsla(0, 0%, 0%, 0.171);
+}
+
+@media (max-width: 768px){
+
+    .cabeza .navegacion ul{
+        display: block;
+    }
+        
+}

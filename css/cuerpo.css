@@ -1,0 +1,105 @@
+*{
+    box-sizing: border-box;
+}
+
+/*esta caja contiene el contenido de las cartas*/
+.contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: rgba(6, 22, 110, 0.671);
+}
+
+/*contenedor*/
+.Cuerpo{
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+
+}
+
+.Cuerpo .card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+}
+
+.Cuerpo .card .imbox:hover{
+    background: rgba(26, 23, 23, 0.582);
+}
+
+.Cuerpo .card:nth-child(even){
+    flex-direction: column-reverse;
+}
+
+.Cuerpo .card .imbox{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    background: #000000;
+}
+
+.Cuerpo .card .imbox img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.Cuerpo .card .contenido{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Cuerpo .card .contenido{
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 1000px){
+
+    .Cuerpo{
+        grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+        margin: 50px;   
+    }
+
+    .Cuerpo .card{
+        flex-direction: row;
+        margin: 10px 0px;
+    }
+
+    .Cuerpo .card:nth-child(even){
+        flex-direction: row-reverse;
+    }
+
+    .Cuerpo .card .imbox,.Cuerpo .card .contenido{
+        width: 50%;
+    }
+
+}
+
+@media (max-width: 600px){
+
+    .Cuerpo .card{
+        flex-direction: column;
+        margin: 10px 0px;
+    }
+
+    .Cuerpo .card:nth-child(even){
+        flex-direction: column-reverse;
+    }
+
+    .Cuerpo .card .imbox,.Cuerpo .card .contenido{
+        width: 100%;
+    }
+
+}
