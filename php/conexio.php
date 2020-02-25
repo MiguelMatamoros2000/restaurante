@@ -1,6 +1,7 @@
 <?php
-    define('HOST','127.0.0.1');
-    define('USER','root');
-    define('PASS','');
-    define('DBNAME','restaurante');
+    define('HOST', 'localhost');//redireccion al localhost por dns hosting
+    define('USER', 'root');//nombre de usuario
+    define('PASS', '');//contraseña
+    define('DBNAME', 'restaurante');//nombre de base de datos
+
 ?>
