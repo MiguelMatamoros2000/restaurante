@@ -1,4 +1,5 @@
 <?php
+//estas son variables constantes
     define('HOST', 'localhost');//redireccion al localhost por dns hosting
     define('USER', 'root');//nombre de usuario
     define('PASS', '');//contraseña

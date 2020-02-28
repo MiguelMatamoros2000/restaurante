@@ -24,11 +24,10 @@
             <button type="submit" >Guardar</button>
         </form>
 
-        <a href="listaTipos.php">ver datos</a>
         
     <?php
 
-        require_once("consultas.php");
+        require_once(".//ConexionesBD/consultas.php");
         $obj = new restaurante();
 
        if( $_POST ){
@@ -38,6 +37,7 @@
        }else{
 
        }
+       $obj->conectar();
 
        echo "<table><tr>
        <th>Nombre</th>

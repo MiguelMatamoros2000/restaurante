@@ -8,33 +8,32 @@
 
         public function __construct(){
 
-            $this->conn = new mysqli(HOST,USER,PASS,DBNAME);//pasamos los parametros de la conexion
+            try{
+                $this->conn = new PDO('mysql:host='.HOST.';dbname='.DBNAME,USER,PASS);
+            }catch( consultasEception $e){
+                echo "Error: ". $e->getMessage();
+            }
         }
 
         public function conectar(){
             //comparamos la variable conexion para detectar errores
-            if($this->conn->connect_error){
-
-                die("Connection failed".$conn->connect_error);
-            }else{
-                
-                echo"conexion exitosa";
-            }
         }
 
         public function GuardarTipo( $nom, $ur){
 
             $consulta="insert into tipocomida value(null,'".$nom."','".$ur."')";
             if( $this->conn->query($consulta) )
-            echo "Datos Guardados <br>";
+            echo "<script>alert('Datos guardados');</script>";
             else
-            echo "Fallo el guardado";
+            echo "<script>alert('Fallo el guardados');</script>";
         }
 
         public function  buscar( $x ){
             $consulta="select * from tipocomida where idtipoComida ='".$x."'";
             $result = $this->conn->query($consulta);
-            $row = $result->fetch_assoc();
+            foreach(  $result as $fila){
+                $row = $fila;
+            } 
             return $row;
         }
 
@@ -60,21 +59,13 @@
 
             $consulta = "Select * from tipocomida";
             $resultado = $this->conn->query($consulta);
-            $color = 0;
 
-            while($renglon = $resultado->fetch_assoc()){
-
-                if( $color%2 == 0){
-                    echo "<tr class='azul'>";
-                }else{
-                    echo "<tr>";
-                    echo "<td>" .$renglon['nombre']. "</td>
-                       <td><a href='modificarTipo.php?codigo=".$renglon['idtipoComida']."'><span class='fa-edit fa'>0</span ></a></td>
-                       <td><a href='eliminar.php?codigo=".$renglon['idtipoComida']. "'><span class='fa-trash-o fa'>1</span></a></td>
+            foreach($resultado as $fila){
+                echo "<tr>";
+                    echo "<td>" .$fila['nombre']. "</td>
+                       <td><a href='modificarTipo.php?codigo=".$fila['idtipoComida']."'><span class='fa-edit fa'>0</span ></a></td>
+                       <td><a href='eliminar.php?codigo=".$fila['idtipoComida']. "'><span class='fa-trash-o fa'>1</span></a></td>
                     </tr>";
-                }
-
-                $color++;
             }
         }
     }
