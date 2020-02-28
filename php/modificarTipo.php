@@ -8,7 +8,7 @@
 <body>
 
     <?php
-    require_once("consultas.php");
+    require_once(".//ConexionesBD/consultas.php");
     $db=new restaurante();
     $var = $_GET['codigo']; //resive el valor de una variabl
     $r=$db->buscar($var);//pasa el valor de metodo
@@ -31,7 +31,7 @@
 
     <?php
 
-        require_once("consultas.php");
+        require_once(".//ConexionesBD/consultas.php");
         $obj = new restaurante();
 
        if( $_POST ){
