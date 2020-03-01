@@ -68,6 +68,28 @@
                     </tr>";
             }
         }
+
+        public function seleccionTipo(){
+
+            $consulta = "Select * from tipocomida";
+            $resultado = $this->conn->query($consulta);
+
+            foreach($resultado as $fila){
+                echo "
+                    <div class='card'>
+				        <div class='imgBX'>
+					        <img src=".$fila['fotografia'].">
+				        </div>
+				    <div class='contentBx'>
+					    <div class='content'>
+						    <h2>".$fila['nombre']."</h2>
+						    <a href='VerComida.php?codigo=".$fila['idtipoComida']."'>Ver platillos</a>
+					    </div>
+				    </div>
+			    </div>
+                ";
+            }
+        }
     }
     //creamos una clase objetos
 
