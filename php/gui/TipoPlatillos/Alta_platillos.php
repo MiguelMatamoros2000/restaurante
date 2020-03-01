@@ -37,7 +37,6 @@
        }else{
 
        }
-       $obj->conectar();
 
        echo "<table><tr>
        <th>Nombre</th>
