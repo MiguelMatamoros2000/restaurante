@@ -27,7 +27,7 @@
         
     <?php
 
-        require_once(".//ConexionesBD/consultas.php");
+        require_once("..//php/ConexionesBD/consultas.php");
         $obj = new restaurante();
 
        if( $_POST ){

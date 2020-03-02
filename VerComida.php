@@ -6,6 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>hola</h1>
+    <div class="cabeza">
+        <nav class="barra"></nav>
+    </div>
+    
+    <div class="cuerpo">
+    
+    </div>
 </body>
 </html>

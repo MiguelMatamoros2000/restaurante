@@ -8,15 +8,16 @@
 
         public function __construct(){
 
+           $this->conectar();
+        }
+
+        public function conectar(){
+            //comparamos la variable conexion para detectar errores
             try{
                 $this->conn = new PDO('mysql:host='.HOST.';dbname='.DBNAME,USER,PASS);
             }catch( consultasEception $e){
                 echo "Error: ". $e->getMessage();
             }
-        }
-
-        public function conectar(){
-            //comparamos la variable conexion para detectar errores
         }
 
         public function GuardarTipo( $nom, $ur){
