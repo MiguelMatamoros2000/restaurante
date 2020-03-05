@@ -4,7 +4,7 @@ require_once('config.php');
 
 class conexionDB{
 
-    public $conn;
+    public $conexion;
 
     public function conectar(){
         //comparamos la variable conexion para detectar errores
@@ -13,6 +13,8 @@ class conexionDB{
         }catch( consultasEception $e){
             echo "Error: ". $e->getMessage();
         }
+
+        return $this->conexion;
     }
 }
 ?>
