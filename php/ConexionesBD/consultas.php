@@ -1,25 +1,11 @@
 <?php
     //traemos la conexion
-    require_once ('conexio.php');
+    require_once ('conexionDB.php');
 
-    class restaurante{
+    class restaurante extends conexionDB{
+
+        public __cosntructor
         
-        public $conn;
-
-        public function __construct(){
-
-           $this->conectar();
-        }
-
-        public function conectar(){
-            //comparamos la variable conexion para detectar errores
-            try{
-                $this->conn = new PDO('mysql:host='.HOST.';dbname='.DBNAME,USER,PASS);
-            }catch( consultasEception $e){
-                echo "Error: ". $e->getMessage();
-            }
-        }
-
         public function GuardarTipo( $nom, $ur){
 
             $consulta="insert into tipocomida value(null,'".$nom."','".$ur."')";
@@ -88,6 +74,32 @@
 					    </div>
 				    </div>
 			    </div>
+                ";
+            }
+        }
+
+        public function seleccionComida(){
+
+            $consulta = "Select * from tipocomida";
+            $resultado = $this->conn->query($consulta);
+
+            foreach($resultado as $fila){
+                echo "
+                    <div class='carta'>
+                        <div class='cara caraUno'>
+                            <div class='conetnido'>
+                                <h1>Titulo</h1>
+                                <p>Precio</p>
+                                <label for=''>Cantidad :</label>
+                                <input type='number' name='' id=''>
+                                <br>
+                                <button type='submit' >Agregar</button>
+                             </div>
+                        </div>
+                        <div class='cara caraDos'>
+                            <img src='".."' alt=''>
+                        </div>
+                    </div>
                 ";
             }
         }
