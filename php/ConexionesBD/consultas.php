@@ -8,9 +8,13 @@
 
             $consulta="insert into tipocomida value(null,'".$nom."','".$ur."')";
             if( $this->conectar()->query($consulta) )
-            echo "Datos guardados";
+            echo "<div class='alert alert-success'>
+                    <strong>Correcto!</strong> Los Datos se guardaron Corectamente.
+                </div>";
             else
-            echo "Fallo el guardados";
+                echo "<div class='alert alert-danger'>
+                        <strong>Error!</strong> Fallo al guardar los datos.
+                    </div>";
         }
 
         public function  buscar( $x ){
@@ -48,8 +52,8 @@
             foreach($resultado as $fila){
                 echo "<tr>";
                     echo "<td>" .$fila['nombre']. "</td>
-                       <td><a href='modificarTipo.php?codigo=".$fila['idtipoComida']."'><span class='fa-edit fa'>0</span ></a></td>
-                       <td><a href='eliminar.php?codigo=".$fila['idtipoComida']. "'><span class='fa-trash-o fa'>1</span></a></td>
+                       <td><a href='modificarTipo.php?codigo=".$fila['idtipoComida']."'><span class='fa-edit fa'></span ></a></td>
+                       <td><a href='eliminar.php?codigo=".$fila['idtipoComida']. "'><span class='fa-trash-o fa'></span></a></td>
                     </tr>";
             }
         }
@@ -76,6 +80,20 @@
             }
         }
 
+        public function seleccionTipoComida(){
+
+            $consulta = "Select * from tipocomida";
+            $resultado = $this->conectar()->query($consulta);
+
+            foreach($resultado as $fila){
+                echo "
+                    <li class='nav-item'>
+                        <a class='nav-link' href='VerComida.php?codigo=".$fila['idtipoComida']."'>".$fila['nombre']."</a>
+                    </li>
+                ";
+            }
+        }
+
         public function seleccionComida(){
 
             $consulta = "Select * from comida";
@@ -83,21 +101,18 @@
 
             foreach($resultado as $fila){
                 echo "
-                    <div class='carta'>
-                        <div class='cara caraUno'>
-                            <div class='conetnido'>
-                                <h1>'".$fila['nombre']."'</h1>
-                                <p>'".$fila['precio']."'</p>
-                                <label for=''>Cantidad :</label>
-                                <input type='number' name='' id=''>
-                                <br>
-                                <button type='submit' >Agregar</button>
-                             </div>
-                        </div>
-                        <div class='cara caraDos'>
-                            <img src= alt=''>
-                        </div>
+                <div class='card  my-4 p-10' style='width:300px'>
+                <img class='card-img-top' src=".$fila['fotografia']." style='width:300px; height: 300px ;'  alt='Card image'>
+                <div class='body-card'>
+                    <h4 class='card-title'>".$fila['nombre']."</h4>
+                    <p class='card-text'>Precio: $".$fila['precio']."</p>
+                    <div class='form-group'>
+                        <label for=''>Cantidad:</label>
+                        <input type='number' value = '0' name='foto' class='form-control' id='' placeholder='ingresa la cantidad'>
                     </div>
+                    <button type='submit' class='btn btn-primary btn-block'>Agregar</button>
+                </div>
+            </div>
                 ";
             }
         }

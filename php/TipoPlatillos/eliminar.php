@@ -8,7 +8,7 @@
 <body>
 
     <?php
-        require_once(".//ConexionesBD/consultas.php");
+        require_once("..//ConexionesBD/consultas.php");
         $obj = new restaurante();
         $var=$_GET['codigo'];
         $obj->eliminar($var);
