@@ -9,6 +9,8 @@ formulario.addEventListener('submit', function(e){
 
     //nueva informacion del formulario
     var datos = new FormData(formulario);
+    console.log(datos);
+    console.log(datos.get('nombre'));
 
     fetch('ConsultasTipoComida.php',{
         method: 'POST',
