@@ -1,5 +1,8 @@
 <?php
     include_once './/php/ConexionesBD/config.php';
+    include_once './/php/ConexionesBD/conexionDB.php';
+    $obj = new conexionDB();
+
     session_start();
     //evaluamos el boto
 
@@ -73,6 +76,13 @@
                     $Mensaje = 'OK ID correcto'.$id;
                 }
 
+            break;
+
+            case 'Guardar':
+                foreach($_SESSION['CARRITO'] as $ind=>$prod){
+                    $statement = $obj->conectar()->prepare("insert into tipocomida value(null,'".$prod['ID']."','".$prod['CAN']."','".$prod['PRE']."')");
+                    $statement->execute();
+                }
             break;
         };
 
