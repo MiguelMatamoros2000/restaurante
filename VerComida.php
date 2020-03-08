@@ -57,9 +57,11 @@
     
                 }
 
+                echo $Mensaje;
+                
                 $obj->seleccionComida( $var);
 
-                echo $Mensaje;
+                
             ?>
         </div>
     </div>
