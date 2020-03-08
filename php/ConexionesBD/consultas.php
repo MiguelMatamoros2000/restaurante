@@ -94,25 +94,33 @@
             }
         }
 
-        public function seleccionComida(){
+        public function seleccionComida( $codigo){
 
-            $consulta = "Select * from comida";
-            $resultado = $this->conectar()->query($consulta);
+            $consulta = "Select * from comida where tipoComida = :id";
+            $statement = $this->conectar()->prepare($consulta);
+            $statement->execute(array(':id' => $codigo));
 
-            foreach($resultado as $fila){
+            $resultado = $statement->fetchAll();
+            
+           foreach($resultado as $fila){
                 echo "
                 <div class='card  my-4 p-10' style='width:300px'>
-                <img class='card-img-top' src=".$fila['fotografia']." style='width:300px; height: 300px ;'  alt='Card image'>
-                <div class='body-card'>
-                    <h4 class='card-title'>".$fila['nombre']."</h4>
-                    <p class='card-text'>Precio: $".$fila['precio']."</p>
-                    <div class='form-group'>
-                        <label for=''>Cantidad:</label>
-                        <input type='number' value = '0' name='foto' class='form-control' id='' placeholder='ingresa la cantidad'>
+                    <img class='card-img-top' src=".$fila['fotografia']." style='width:300px; height: 300px ;'  alt='Card image'>
+                    <div class='body-card'>
+                        <h4 class='card-title'>".$fila['nombre']."</h4>
+                        <p class='card-text'>Precio: $".$fila['precio']."</p>
+                        <form id = 'Formulario' method = 'POST' action = '' >
+                            <div class='form-group'>
+                                <input type='hidden' class = 'form-control' name='id' placeholder='Id' value = ".openssl_encrypt($fila['idComida'],COD,KEY).">
+                                <input type='hidden' class = 'form-control' name='nombre' placeholder='nombre' value =".openssl_encrypt($fila['nombre'],COD,KEY).">
+                                <input type='hidden' class = 'form-control' name='precio' placeholder='nombre'value =".openssl_encrypt($fila['precio'],COD,KEY).">
+                                <label for=''>Cantidad:</label>
+                                <input type='number' value = '0' name='can' class='form-control my-2' id='' placeholder='ingresa la cantidad'>
+                                <button type='submit' name = 'btnAccion' value = 'Agregar' class='btn btn-primary btn-block'>Agregar</button>
+                            </div>
+                        </form>
                     </div>
-                    <button type='submit' class='btn btn-primary btn-block'>Agregar</button>
                 </div>
-            </div>
                 ";
             }
         }

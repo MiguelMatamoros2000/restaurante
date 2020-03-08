@@ -5,16 +5,12 @@ var formulario = document.getElementById('Formulario');
 formulario.addEventListener('submit', function(e){
     e.preventDefault();//rvita que se ejecute en el navegaador
 //los fuction son funciones parecidas a lo que hacemos en java
-    console.log("me diste un this.click");
 
     //nueva informacion del formulario
     var datos = new FormData(formulario);
-    console.log(datos);
-    console.log(datos.get('nombre'));
 
-    fetch('ConsultasTipoComida.php',{
+    fetch('conexionAjax.php',{
         method: 'POST',
-        body: datos
     })
         .then(res => res.json())
         .then(data => {
