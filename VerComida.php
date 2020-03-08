@@ -1,3 +1,7 @@
+<?php
+ include_once 'Carrito.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +17,8 @@
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </head>
 
-<body>
+<body>         
+        
     <div class="navbar navbar-expand-md bg-dark navbar-dark">
         <a class="navbar-toggler" href="">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -29,9 +34,11 @@
 
                         $obj->seleccionTipoComida();
                      ?>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="PaginaCarrito.php">
                         <ion-icon name="cart-outline" size="large"></ion-icon>
-                    </a>
+                    (<?php 
+                        echo ( empty($_SESSION['CARRITO']) )?0:count($_SESSION['CARRITO']);
+                    ?>)</a>
                 </li>
             </ul>
         </div>
@@ -44,7 +51,15 @@
 
                 $obj = new restaurante();
 
-                $obj->seleccionComida();
+                try{
+                    $var = $_GET['codigo']; //resive el valor de una variabl
+                }catch(PDOEception $e){ 
+    
+                }
+
+                $obj->seleccionComida( $var);
+
+                echo $Mensaje;
             ?>
         </div>
     </div>

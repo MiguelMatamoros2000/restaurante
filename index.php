@@ -12,7 +12,7 @@
 		<?php
 		        require_once(".//php/ConexionesBD/consultas.php");
 				$obj = new restaurante();
-
+		
 				$obj->seleccionTipo();
 		?>
 	</div>
