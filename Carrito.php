@@ -7,7 +7,7 @@
     //evaluamos el boto
 
     $Mensaje ="";// esta variable nos servira para regresar un mensaje
-    
+    $ind = 0;
     //Evalumos el voton que esta actuando
     if(isset($_POST['btnAccion'])){
 
@@ -19,6 +19,7 @@
                 if( is_numeric(openssl_decrypt($_POST['id'],COD,KEY)) ){
                     $id = openssl_decrypt($_POST['id'],COD,KEY);
                     $Mensaje = 'OK ID correcto'.$id;
+                    
                 }else{
                     $Mensaje = 'OK ID correcto'.$id;
                 }
@@ -38,7 +39,11 @@
                 }
 
                 if (!isset($_SESSION['CARRITO'])) {
+                    
+                    $ind = $ind + 1;
+
                     $producto = array(
+                        'IN' => $ind,
                         'ID' => $id,
                         'NOMBRE' => $nombre,
                         'PRE' => $precio,
@@ -47,9 +52,11 @@
 
                     $_SESSION['CARRITO'][0] = $producto;
                 } else {
-                    $numProductos = count($_SESSION['CARRITO']);
 
+                    $numProductos = count($_SESSION['CARRITO']);
+                    $ind = $numProductos + 1;
                     $producto = array(
+                        'IN' => $ind,
                         'ID' => $id,
                         'NOMBRE' => $nombre,
                         'PRE' => $precio,
@@ -59,7 +66,7 @@
                     $_SESSION['CARRITO'][$numProductos] = $producto;
                 }
                 
-                $Mensaje = print_r( $_SESSION,true);
+                $Mensaje = print_r( $ind,true);
             break;
 
             case 'Eliminar':
@@ -68,7 +75,7 @@
                     $idel = $_POST['id'];
 
                     foreach($_SESSION['CARRITO'] as $indice=>$producto){
-                        if($producto['ID'] == $idel){
+                        if($producto['IN'] == $idel){
                             unset($_SESSION['CARRITO'][$indice]);
                         }
                     }
@@ -79,10 +86,32 @@
             break;
 
             case 'Guardar':
-                foreach($_SESSION['CARRITO'] as $ind=>$prod){
-                    $statement = $obj->conectar()->prepare("insert into tipocomida value(null,'".$prod['ID']."','".$prod['CAN']."','".$prod['PRE']."')");
-                    $statement->execute();
+
+                $fechaActual = date('Y-m-d');
+                $statement = $obj->conectar()->prepare("insert into venta value(null,'".$fechaActual."')");
+                $statement->execute();
+
+                //selecionamos el id de la fecha
+                $stm = $obj->conectar()->prepare("SELECT * FROM `venta` WHERE 1");
+                $stm->execute();
+
+                $resultado = $stm->fetchAll();
+
+                foreach($resultado as $fila){
+                    $id = $fila['id'];
                 }
+                echo $id;
+                foreach($_SESSION['CARRITO'] as $ind=>$prod){
+                    $st = $obj->conectar()->prepare("insert into tiket value(null,'".$id."','".$prod['ID']."','".$prod['CAN']."')");
+                    $st->execute();
+                }
+
+                session_unset();
+            break;
+
+
+            case 'Cancelar':
+                session_unset();
             break;
         };
 

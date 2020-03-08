@@ -48,13 +48,14 @@ include_once 'Carrito.php';
 
                 foreach($_SESSION['CARRITO'] as $indice=>$producto){
                     $columnas.=" <tr>
-                                <td width='40%'>".$producto['NOMBRE']."</td>
+                                <td width='5%'>".$producto['IN']."</td>
+                                <td width='35%'>".$producto['NOMBRE']."</td>
                                 <td width='15%'>".$producto['CAN']."</td>
                                 <td width='20%'>".$producto['PRE']."</td>
                                 <td width='20%'>".number_format($producto['PRE'] * $producto['CAN'],2 )."</td>
                                 <td width='5%'>
                                 <form action='' method='post'>
-                                    <input type = 'hidden' name = 'id' placeholder='ID' value = ".$producto['ID']." >
+                                    <input type = 'hidden' name = 'id' placeholder='ID' value = ".$producto['IN']." >
                                     <button name = 'btnAccion' value = 'Eliminar' class ='btn btn-danger' type = 'submit'>Eliminar</button></td>
                                 </form>
                             </tr>";
@@ -64,12 +65,13 @@ include_once 'Carrito.php';
         echo "<table class='table table-striped table-linght table-bordered'>
             <thead class='thead-dark'>
                 <tr>
-                    <td>Contenido del carrito</td>
+                    <td colspan = '3' aling = 'right'>Contenido del carrito</td>
                 </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th width='40%''>Descripcion</th>
+                        <th width='5%''>NO</th>
+                        <th width='35%''>Descripcion</th>
                         <th width='15%'>Cantidad</th>
                         <th width='20%'>Precio</th>
                         <th width='20%''>Total</th>
@@ -79,19 +81,28 @@ include_once 'Carrito.php';
                     ."<tr>
                         <td colspan = '3' aling = 'right'> <h3>Total :</h3> </td>
                         <td aling = 'right'> <h3>".number_format($TotalCompra,2)."</h3></td>
-                        <td></td>
+                        <td>
+                            <form action='' method='post'>
+                                <button type='submit'  name = 'btnAccion' value = 'Cancelar' class = 'btn btn-primary' >Cancelar</button>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
-        </table>";
+        </table>
+        
+        <form action='' method='post'>
+            <button type='submit'  name = 'btnAccion' value = 'Guardar' class = 'btn btn-success btn-block' >Guardar</button>
+        </form>
+
+        ";
         
             }else{
                 echo"<div class='alert alert-light'>
-                    <strong>Mensaje!</strong> El carrrito esta vacio alert.
+                    <strong>Mensaje!</strong> El carrrito esta vacio.
                   </div>";
             }
-
-            
         ?>
+        
     </div>
 
 </body>
