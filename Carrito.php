@@ -100,7 +100,7 @@
                 foreach($resultado as $fila){
                     $id = $fila['id'];
                 }
-                echo $id;
+
                 foreach($_SESSION['CARRITO'] as $ind=>$prod){
                     $st = $obj->conectar()->prepare("insert into tiket value(null,'".$id."','".$prod['ID']."','".$prod['CAN']."')");
                     $st->execute();
