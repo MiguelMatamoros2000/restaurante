@@ -50,10 +50,11 @@
             $resultado = $this->conectar()->query($consulta);
 
             foreach($resultado as $fila){
-                echo "<tr>";
-                    echo "<td>" .$fila['nombre']. "</td>
-                       <td><a href='modificarTipo.php?codigo=".$fila['idtipoComida']."'><span class='fa-edit fa'></span ></a></td>
-                       <td><a href='eliminar.php?codigo=".$fila['idtipoComida']. "'><span class='fa-trash-o fa'></span></a></td>
+                echo "<tr>
+                        <td>" .$fila['idtipoComida']. "</td>
+                        <td>" .$fila['nombre']. "</td>
+                        <td><a href='modificarTipo.php?codigo=".$fila['idtipoComida']."'><span class='fa-edit fa'></span ></a></td>
+                        <td><a href='eliminar.php?codigo=".$fila['idtipoComida']. "'><span class='fa-trash-o fa'></span></a></td>
                     </tr>";
             }
         }
@@ -123,6 +124,35 @@
                 </div>
                 ";
             }
+        }
+
+        public function VentasDelDia(){
+            $total = 0;
+            $fechaActual = date('Y-m-d');
+
+            $sql = "SELECT tiket.idVenta, comida.nombre,comida.precio, tiket.Cantidad,(comida.precio * tiket.Cantidad) as 'total' 
+            FROM tiket INNER JOIN comida ON (comida.idComida = tiket.idcomida_2) 
+            INNER JOIN venta ON (venta.id = tiket.idVenta);";
+            $stm = $statement = $this->conectar()->prepare($sql);
+            $stm->execute();
+
+            $resultado = $stm->fetchAll();
+            echo $sql;
+            foreach($resultado as $fila){
+                $total = $total + $fila['total'];
+                echo "<tr>
+                        <td>" .$fila['idVenta']. "</td>
+                        <td>" .$fila['nombre']. "</td>
+                        <td>" .$fila['precio']."</td>
+                        <td>" .$fila['Cantidad']."</td>
+                        <td>" .$fila['total']."</td>
+                    </tr>";
+            }
+            
+            echo "<tr>
+                        <td colspan = '3' aling = 'right' > <h3> Total del dia </h3> </td>
+                        <td colspan = '3' aling = 'right'> <h3>" .$total. "</h3> </td>
+                    </tr>";
         }
     }
 

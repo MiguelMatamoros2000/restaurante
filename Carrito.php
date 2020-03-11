@@ -92,7 +92,7 @@
                 $statement->execute();
 
                 //selecionamos el id de la fecha
-                $stm = $obj->conectar()->prepare("SELECT * FROM `venta` WHERE 1");
+                $stm = $obj->conectar()->prepare("SELECT * FROM venta");
                 $stm->execute();
 
                 $resultado = $stm->fetchAll();
@@ -101,12 +101,15 @@
                     $id = $fila['id'];
                 }
 
+                echo $id;
                 foreach($_SESSION['CARRITO'] as $ind=>$prod){
-                    $st = $obj->conectar()->prepare("insert into tiket value(null,'".$id."','".$prod['ID']."','".$prod['CAN']."')");
-                    $st->execute();
+                    $sql = "insert into tiket value(null,'".$id."','".$prod['ID']."','".$prod['CAN']."')";
+                    $st = $obj->conectar()->query($sql);
+                    echo $sql; 
                 }
-
-                session_unset();
+                /*$st->execute();*/
+                /*echo $sql;*/
+                //session_unset();
             break;
 
 
