@@ -9,12 +9,7 @@
 
 <body>
 	<div class="container">
-		<?php
-		        require_once(".//php/ConexionesBD/consultas.php");
-				$obj = new restaurante();
-		
-				$obj->seleccionTipo();
-		?>
+		<h4>Hola</h4>
 	</div>
 </body>
 

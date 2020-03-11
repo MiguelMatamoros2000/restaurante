@@ -132,7 +132,7 @@
 
             $sql = "SELECT tiket.idVenta, comida.nombre,comida.precio, tiket.Cantidad,(comida.precio * tiket.Cantidad) as 'total' 
             FROM tiket INNER JOIN comida ON (comida.idComida = tiket.idcomida_2) 
-            INNER JOIN venta ON (venta.id = tiket.idVenta) WHERE venta.Fecha = '".$fechaActual."';";
+            INNER JOIN venta ON (venta.id = tiket.idVenta);";
             $stm = $statement = $this->conectar()->prepare($sql);
             $stm->execute();
 
